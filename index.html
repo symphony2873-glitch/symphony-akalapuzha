@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symphony | Akalapuzha Luxury Houseboat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dust-container"><div class="dust-layer"></div></div>
+
+    <div class="nav-container">
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div class="bar1"></div><div class="bar2"></div><div class="bar3"></div>
+        </div>
+        <nav class="side-menu" id="sideMenu">
+            <h2 class="menu-brand">SYMPHONY</h2>
+            <ul class="nav-links">
+                <li><a href="#" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">The Viewpoint</a></li>
+                <li><a href="#safety" onclick="closeMenu()">Safety & First Aid</a></li>
+                <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+                <li><a href="#reviews" onclick="closeMenu()">Reviews</a></li>
+                <li><a href="#upload" onclick="closeMenu()">Upload Photo</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Book Now</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="fixed-logo-container">
+        <img src="Boat Logo.jpg" alt="Symphony Logo" id="mainLogo" class="big-parallax-logo">
+        <div class="scroll-hint" id="scrollHint">
+            <p>Swipe up to explore</p>
+            <div class="arrow-down"></div>
+        </div>
+    </div>
+
+    <main class="content-wrapper">
+        <div class="entrance-spacer"></div>
+
+      <section id="about">
+    <h2 class="logo-font-match gold-text">Akalapuzha Viewpoint</h2>
+    <div class="nature-content">
+        <p class="premium-p">
+            Akalapuzha is where the rhythm of the backwaters meets the silence of the soul. Known as the "hidden jewel" of Kozhikode, this vast expanse of water is fringed by dense, emerald-green coconut groves and ancient mangrove trails that breathe life into the horizon.
+        </p>
+        <p class="premium-p secondary-text">
+            From the deck of Symphony, the view is a living painting. You will witness the sky bleeding into shades of molten gold and deep violet as the sun dips below the water line. The calm, glass-like surface reflects the soaring water birds and the gentle sway of the palms, offering a panoramic sanctuary far removed from the rush of the world.
+        </p>
+    </div>
+</section>
+
+        <section id="safety">
+            <h2 class="logo-font-match gold-text">Safety & First Aid</h2>
+            <div class="safety-grid">
+                <div class="safety-card"><span class="safety-icon">🦺</span><h4>Life Jackets</h4><p>Certified jackets for all ages. Mandatory on the upper deck.</p></div>
+                <div class="safety-card"><span class="safety-icon">🆘</span><h4>SOS GPS</h4><p>24/7 tracking and direct SOS communication with marine patrol.</p></div>
+                <div class="safety-card"><span class="safety-icon">🩹</span><h4>Medical Kit</h4><p>Full First Aid kit including motion sickness relief and ORS.</p></div>
+                <div class="safety-card"><span class="safety-icon">🔥</span><h4>Fire Safety</h4><p>ABC extinguishers and smoke detectors in cabins and kitchen.</p></div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2 class="logo-font-match gold-text">Symphony Gallery</h2>
+            <div id="cloudinary-gallery" class="gallery-grid limit-view">
+                <p id="empty-msg" class="empty-state-text">No photos yet. Be the first to share your journey!</p>
+            </div>
+            <button id="gallery-more-btn" class="read-more-btn" onclick="toggleView('cloudinary-gallery', 'gallery-more-btn')" style="display:none;">Read More Photos</button>
+        </section>
+
+        <section id="reviews">
+            <h2 class="logo-font-match gold-text">Guest Experiences</h2>
+            <div id="reviews-display" class="review-container limit-view">
+                <p id="no-reviews-msg" class="empty-state-text">No reviews yet. Share your experience below!</p>
+            </div>
+            <button id="reviews-more-btn" class="read-more-btn" onclick="toggleView('reviews-display', 'reviews-more-btn')" style="display:none;">Read More Reviews</button>
+
+            <div class="review-container">
+                <div class="add-review-box">
+                    <h3>Leave a Review</h3>
+                    <div class="star-rating">
+                        <input type="radio" name="stars" id="s5" value="5"><label for="s5">★</label>
+                        <input type="radio" name="stars" id="s4" value="4"><label for="s4">★</label>
+                        <input type="radio" name="stars" id="s3" value="3"><label for="s3">★</label>
+                        <input type="radio" name="stars" id="s2" value="2"><label for="s2">★</label>
+                        <input type="radio" name="stars" id="s1" value="1"><label for="s1">★</label>
+                    </div>
+                    <input type="text" id="reviewer-name" placeholder="Your Name" class="review-input-style">
+                    <textarea id="review-text" placeholder="Tell us about your trip..."></textarea>
+                    <button class="gold-btn" onclick="addReview()">Post Review</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="upload">
+            <h3 class="logo-font-match gold-text">Share Your Moments</h3>
+            <div class="upload-box">
+                <label for="photo-input" class="upload-btn">📷 ADD PHOTOS</label>
+                <input type="file" id="photo-input" multiple hidden accept="image/*">
+                <p id="upload-status"></p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="booking-container">
+                <a href="tel:+919447739340" class="call-action">Direct Call</a>
+                <a href="https://wa.me/919447739340" class="wa-action">WhatsApp Booking</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        /* --- CLOUDINARY CONFIG --- */
+        const CLOUD_NAME = "your_cloud_name"; 
+        const UPLOAD_PRESET = "symphony_preset";
+
+        const galleryDiv = document.getElementById('cloudinary-gallery');
+        const reviewsDiv = document.getElementById('reviews-display');
+
+        /* --- TOGGLE LOGIC --- */
+        function toggleView(containerId, btnId) {
+            const container = document.getElementById(containerId);
+            const btn = document.getElementById(btnId);
+            container.classList.toggle('expanded');
+            btn.innerText = container.classList.contains('expanded') ? "Show Less" : (containerId.includes('gallery') ? "Read More Photos" : "Read More Reviews");
+        }
+
+        /* --- CLOUDINARY UPLOAD --- */
+        document.getElementById('photo-input').addEventListener('change', async (e) => {
+            document.getElementById('upload-status').innerText = "Uploading...";
+            for (let file of e.target.files) {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', UPLOAD_PRESET);
+                try {
+                    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {method:'POST', body:formData});
+                    const data = await res.json();
+                    if(data.secure_url) {
+                        const empty = document.getElementById('empty-msg');
+                        if(empty) empty.remove();
+                        const img = document.createElement('img');
+                        img.src = data.secure_url; img.className = "gallery-img animate-in";
+                        galleryDiv.prepend(img); 
+                        if (galleryDiv.children.length > 5) document.getElementById('gallery-more-btn').style.display = "inline-block";
+                    }
+                } catch(err) { console.error(err); }
+            }
+            document.getElementById('upload-status').innerText = "Uploaded Successfully!";
+        });
+
+        /* --- CUSTOMER REVIEW POST --- */
+        function addReview() {
+            const name = document.getElementById('reviewer-name').value;
+            const text = document.getElementById('review-text').value;
+            const stars = document.querySelector('input[name="stars"]:checked');
+            if (!name || !text || !stars) { alert("Please complete the review fields."); return; }
+
+            const noRev = document.getElementById('no-reviews-msg');
+            if(noRev) noRev.remove();
+
+            const starIcons = "★".repeat(stars.value) + "☆".repeat(5 - stars.value);
+            const card = document.createElement('div');
+            card.className = "review-card animate-in";
+            card.innerHTML = `<div class="stars">${starIcons}</div><p>"${text}"</p><span class="guest-name">- ${name}</span>`;
+            
+            reviewsDiv.prepend(card); 
+            if (reviewsDiv.children.length > 5) document.getElementById('reviews-more-btn').style.display = "inline-block";
+            
+            document.getElementById('reviewer-name').value = "";
+            document.getElementById('review-text').value = "";
+            alert("Thank you for your review!");
+        }
+
+        /* --- MENU & SCROLL --- */
+        function toggleMenu() { 
+            document.getElementById('sideMenu').classList.toggle('active'); 
+            document.querySelector('.menu-icon').classList.toggle('active-icon'); 
+        }
+        function closeMenu() { 
+            document.getElementById('sideMenu').classList.remove('active'); 
+            document.querySelector('.menu-icon').classList.remove('active-icon'); 
+        }
+        window.onscroll = () => {
+            let val = window.scrollY;
+            document.getElementById('mainLogo').style.opacity = Math.max(1 - (val/600), 0);
+            if(document.getElementById('scrollHint')) document.getElementById('scrollHint').style.opacity = Math.max(1 - (val/150), 0);
+        };
+    </script>
+</body>
+</html>
