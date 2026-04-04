@@ -10,378 +10,153 @@
 }
 
 /* --- 2. GLOBAL RESET --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body { background-color: var(--black); color: var(--white-gold); font-family: var(--body-font); overflow-x: hidden; }
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: var(--black);
-    color: var(--white-gold);
-    font-family: var(--body-font);
-    overflow-x: hidden;
-    line-height: 1.6;
-}
-
-/* --- 3. LUXURY POP-UP NAVIGATION --- */
-.nav-container {
+/* --- 3. THE "CATCHY" STICKY HEADER --- */
+.sticky-top-nav {
     position: fixed;
-    top: 30px;
-    left: 30px;
-    z-index: 1001;
-}
-
-.menu-icon {
-    cursor: pointer;
-    padding: 10px;
-}
-
-.menu-icon div {
-    width: 35px;
-    height: 2px;
-    background: var(--gold);
-    margin: 8px 0;
-    transition: 0.4s;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
-}
-
-/* Hamburger to X Animation */
-.active-icon .bar1 { transform: rotate(-45deg) translate(-8px, 6px); }
-.active-icon .bar2 { opacity: 0; }
-.active-icon .bar3 { transform: rotate(45deg) translate(-8px, -6px); }
-
-.side-menu {
-    position: fixed;
-    top: 0;
-    left: -320px;
-    width: 300px;
-    height: 100vh;
+    top: 0; width: 100%; height: 100px;
     background: rgba(0, 0, 0, 0.98);
-    border-right: 1px solid var(--gold);
-    transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
-    padding: 80px 40px;
+    border-bottom: 2px solid var(--gold);
     z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-100%);
+    transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28); /* Bouncy reveal */
+    pointer-events: none;
 }
+.sticky-top-nav.reveal { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: all; }
 
-.side-menu.active {
-    left: 0;
-}
-
-.menu-brand {
-    font-family: var(--logo-font);
-    color: var(--gold);
-    letter-spacing: 5px;
-    margin-bottom: 40px;
-    text-align: center;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    padding-bottom: 20px;
-}
-
-.nav-links {
-    list-style: none;
-}
-
-.nav-links li {
-    margin: 25px 0;
-}
-
-.nav-links a {
-    color: var(--gold);
-    text-decoration: none;
-    font-family: var(--logo-font);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 1.1rem;
-    display: inline-block;
-    transition: all 0.4s;
-}
-
-.nav-links a:hover {
-    color: #ffffff;
-    transform: scale(1.1) translateX(15px);
-    text-shadow: 0 0 15px var(--gold);
-}
-
-/* --- 4. GHOST LOGO & ENTRANCE --- */
-.fixed-logo-container {
-    position: fixed;
-    inset: 0;
+.header-compact-center {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 40px; /* Brings icons close to the logo */
+}
+
+/* Large Catchy Icons */
+.hero-action-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: black;
+    display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.big-parallax-logo {
-    width: 85%;
-    max-width: 700px;
-    filter: brightness(1.2) drop-shadow(0 0 50px var(--gold));
-    transition: opacity 0.1s linear;
-}
-
-.scroll-hint {
-    margin-top: 30px;
-    text-align: center;
-    color: var(--gold);
-    font-family: var(--logo-font);
-    letter-spacing: 5px;
-}
-
-.arrow-down {
-    width: 20px;
-    height: 20px;
-    border-right: 2px solid var(--gold);
-    border-bottom: 2px solid var(--gold);
-    transform: rotate(45deg);
-    margin: 15px auto;
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0) rotate(45deg); }
-    50% { transform: translateY(-10px) rotate(45deg); }
-}
-
-/* --- 5. CONTENT SECTIONS --- */
-.content-wrapper {
-    position: relative;
-    z-index: 10;
-}
-
-.entrance-spacer {
-    height: 100vh;
-}
-
-section {
-    padding: 120px 20px;
-    text-align: center;
-}
-
-.logo-font-match {
-    font-family: var(--logo-font);
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: 8px;
-    margin-bottom: 30px;
-    font-size: 2.5rem;
-}
-
-/* --- 6. NATURE CONTENT (VIEWPOINT) --- */
-.premium-p {
-    max-width: 850px;
-    margin: 0 auto 20px auto;
-    font-weight: 300;
-    font-size: 1.15rem;
-    line-height: 1.8;
-}
-
-.secondary-text {
-    opacity: 0.85;
-    font-size: 1.05rem;
-    border-top: 1px solid rgba(212, 175, 55, 0.15);
-    padding-top: 25px;
-}
-
-/* --- 7. SAFETY GRID --- */
-.safety-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    max-width: 1100px;
-    margin: 40px auto;
-}
-
-.safety-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    padding: 30px;
+    font-size: 1.5rem;
+    text-decoration: none;
     transition: 0.3s;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
-.safety-card:hover {
-    border-color: var(--gold);
-    transform: translateY(-5px);
+/* Hover: Turn Black */
+.hero-action-btn:hover {
+    background: #ffffff;
+    color: var(--black);
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #ffffff;
 }
 
-.safety-icon {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    display: block;
+.mini-branding { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.mini-branding img { 
+    width: 55px; height: 55px; 
+    border-radius: 50%; 
+    border: 2px solid var(--gold);
+    object-fit: cover;
+}
+.mini-branding span { font-family: var(--logo-font); color: var(--gold); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+
+/* --- 4. NAVIGATION --- */
+.nav-container { position: fixed; top: 25px; left: 25px; z-index: 1100; }
+.menu-icon { cursor: pointer; padding: 10px; background: rgba(0,0,0,0.5); border-radius: 50%; }
+.menu-icon div { width: 28px; height: 2px; background: var(--gold); margin: 6px 0; transition: 0.4s; }
+.active-icon .bar1 { transform: rotate(-45deg) translate(-6px, 6px); }
+.active-icon .bar2 { opacity: 0; }
+.active-icon .bar3 { transform: rotate(45deg) translate(-6px, -6px); }
+
+.side-menu {
+    position: fixed; top: 0; left: -320px; width: 300px; height: 100vh;
+    background: rgba(0, 0, 0, 0.98); border-right: 1px solid var(--gold); transition: 0.5s;
+    padding: 100px 40px; z-index: 1050;
+}
+.side-menu.active { left: 0; }
+.nav-links li { list-style: none; margin: 25px 0; }
+.nav-links a { color: var(--gold); text-decoration: none; font-family: var(--logo-font); text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem; }
+
+/* --- 5. ROUND HERO LOGO --- */
+.fixed-logo-container {
+    position: fixed; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; z-index: 2; pointer-events: none;
+    transition: opacity 0.3s;
+}
+.round-logo-wrapper {
+    width: 280px; height: 280px;
+    border-radius: 50%; overflow: hidden;
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 60px rgba(212, 175, 55, 0.4);
+    background: #000;
+}
+.big-parallax-logo { width: 100%; height: 100%; object-fit: cover; }
+.scroll-hint { margin-top: 30px; color: var(--gold); font-family: var(--logo-font); letter-spacing: 5px; text-align: center; }
+.arrow-down { width: 15px; height: 15px; border-right: 2px solid var(--gold); border-bottom: 2px solid var(--gold); transform: rotate(45deg); margin: 10px auto; animation: bounce 2s infinite; }
+
+/* --- 6. GOLD TEXT GRADIENT --- */
+.gold-text {
+    background: linear-gradient(to bottom, #f5e6be, #d4af37);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
-/* --- 8. DYNAMIC READ MORE LOGIC --- */
-/* Hides any child after the 5th (image or review card) */
-.limit-view > div:nth-child(n+6), 
-.limit-view > img:nth-child(n+6) {
-    display: none; 
+/* --- 7. CONTENT SECTIONS --- */
+.content-wrapper { position: relative; z-index: 10; }
+.entrance-spacer { height: 100vh; }
+section { padding: 100px 20px; text-align: center; max-width: 1000px; margin: 0 auto; }
+.logo-font-match { font-family: var(--logo-font); text-transform: uppercase; letter-spacing: 6px; font-size: 2.2rem; margin-bottom: 30px; }
+.premium-p { font-weight: 300; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
+
+/* --- 8. GRIDS --- */
+.safety-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 30px; 
+    margin-top: 40px; 
 }
+.safety-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.1); padding: 40px; transition: 0.3s; }
+.safety-card:hover { border-color: var(--gold); }
+.safety-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
 
-/* Shown when .expanded is toggled via JS */
-.expanded > div, 
-.expanded > img {
-    display: block !important;
+.gallery-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+.gallery-img { width: 280px; height: 280px; object-fit: cover; border: 1px solid var(--gold); transition: 0.4s; }
+
+.limit-view > *:nth-child(n+6) { display: none; }
+.expanded > * { display: block !important; }
+
+/* --- 9. BUTTONS --- */
+.gold-btn, .upload-btn, .read-more-btn {
+    display: inline-block; padding: 15px 35px; background: var(--gold); color: black;
+    border: none; font-weight: bold; text-transform: uppercase; cursor: pointer; letter-spacing: 2px;
 }
-
-.expanded.gallery-grid {
-    display: flex !important;
-}
-
-.read-more-btn {
-    background: transparent;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    padding: 10px 25px;
-    margin-top: 30px;
-    cursor: pointer;
-    font-family: var(--logo-font);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: 0.3s;
-}
-
-.read-more-btn:hover {
-    background: var(--gold);
-    color: black;
-}
-
-.empty-state-text {
-    opacity: 0.5;
-    font-style: italic;
-    grid-column: 1 / -1;
-}
-
-/* --- 9. REVIEWS & RATING --- */
-.review-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.review-card {
-    background: #0a0a0a;
-    padding: 30px;
-    border-left: 3px solid var(--gold);
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.stars { color: var(--gold); margin-bottom: 10px; }
-
-.guest-name { 
-    color: var(--gold); 
-    font-weight: 600; 
-    text-transform: uppercase; 
-    font-size: 0.8rem;
-    display: block;
-    margin-top: 10px;
-}
-
-.star-rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
+.read-more-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+.review-card { background: #0a0a0a; padding: 25px; border-left: 3px solid var(--gold); margin-bottom: 20px; text-align: left; }
+.star-rating { display: flex; flex-direction: row-reverse; justify-content: center; font-size: 2.5rem; margin-bottom: 20px; }
 .star-rating input { display: none; }
-.star-rating label { color: #222; cursor: pointer; transition: 0.2s; }
-.star-rating label:hover,
-.star-rating label:hover ~ label,
+.star-rating label { color: #222; cursor: pointer; padding: 0 5px; }
 .star-rating input:checked ~ label { color: var(--gold); }
 
-/* --- 10. GALLERY & UPLOAD --- */
-.gallery-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
+/* --- 10. AMBIENCE & RESPONSIVE --- */
+.dust-container { position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.12; }
+.dust-layer { width: 100%; height: 100%; background: radial-gradient(circle, var(--gold) 1px, transparent 1.2px); background-size: 70px 70px; }
 
-.gallery-img {
-    width: 280px;
-    height: 280px;
-    object-fit: cover;
-    border: 1px solid var(--gold);
-    transition: 0.4s;
-}
+@keyframes bounce { 0%, 100% { transform: translateY(0) rotate(45deg); } 50% { transform: translateY(-10px) rotate(45deg); } }
 
-.gallery-img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 20px var(--gold);
-}
-
-.review-input-style, #review-text {
-    width: 100%;
-    background: #000;
-    border: 1px solid #333;
-    color: white;
-    padding: 12px;
-    margin-bottom: 15px;
-    font-family: inherit;
-}
-
-/* --- 11. BUTTONS & ACTIONS --- */
-.gold-btn, .upload-btn {
-    background: var(--gold);
-    color: black;
-    padding: 15px 40px;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.call-action, .wa-action {
-    width: 300px;
-    padding: 18px;
-    text-decoration: none;
-    font-weight: bold;
-    display: block;
-    margin: 10px auto;
-    text-align: center;
-}
-
-.call-action { border: 1px solid var(--gold); color: var(--gold); }
-.wa-action { background: #25D366; color: white; }
-
-/* --- 12. AMBIENCE & ANIMATIONS --- */
-.dust-container {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.12;
-}
-
-.dust-layer {
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, var(--gold) 1px, transparent 1.2px);
-    background-size: 70px 70px;
-}
-
-.animate-in {
-    animation: slideUp 0.6s ease forwards;
-}
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- 13. RESPONSIVE OPTIMIZATION --- */
 @media (max-width: 768px) {
-    .logo-font-match { font-size: 1.8rem; letter-spacing: 4px; }
-    .gallery-img { width: 45%; height: 160px; }
-    .side-menu { width: 100%; left: -100%; }
-    .big-parallax-logo { width: 90%; }
-    .call-action, .wa-action { width: 100%; }
+    .header-compact-center { gap: 15px; }
+    .hero-action-btn { width: 45px; height: 45px; font-size: 1.2rem; }
+    .mini-branding img { width: 45px; height: 45px; }
+    .round-logo-wrapper { width: 220px; height: 220px; }
+    .logo-font-match { font-size: 1.6rem; }
 }
