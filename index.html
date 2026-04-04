@@ -8,13 +8,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="dust-container"><div class="dust-layer"></div></div>
+    <div class="dust-container">
+        <div class="dust-layer"></div>
+    </div>
 
     <header class="sticky-top-nav" id="stickyHeader">
         <div class="header-compact-center">
-            <a href="tel:+919447739340" class="hero-action-btn call-gold" title="Call Now">
-                <i class="fas fa-phone-alt"></i>
+            <a href="tel:+919447739340" class="hero-action-container" title="Call Now">
+                <div class="hero-action-btn call-btn">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <span class="action-label">Contact</span>
             </a>
 
             <div class="mini-branding">
@@ -22,8 +26,11 @@
                 <span>SYMPHONY</span>
             </div>
 
-            <a href="https://wa.me/919447739340" class="hero-action-btn wa-gold" target="_blank" title="WhatsApp Us">
-                <i class="fab fa-whatsapp"></i>
+            <a href="https://wa.me/919447739340" class="hero-action-container" target="_blank" title="For Booking">
+                <div class="hero-action-btn wa-btn">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <span class="action-label">For Booking</span>
             </a>
         </div>
     </header>
@@ -40,7 +47,6 @@
                 <li><a href="#safety" onclick="closeMenu()">Safety & First Aid</a></li>
                 <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
                 <li><a href="#reviews" onclick="closeMenu()">Reviews</a></li>
-                <li><a href="#upload" onclick="closeMenu()">Upload Photo</a></li>
             </ul>
         </nav>
     </div>
@@ -62,10 +68,10 @@
             <h2 class="logo-font-match gold-text">Akalapuzha Viewpoint</h2>
             <div class="nature-content">
                 <p class="premium-p">
-                    Akalapuzha is where the rhythm of the backwaters meets the silence of the soul. Known as the "hidden jewel" of Kozhikode, this vast expanse of water is fringed by dense coconut groves.
+                    Akalapuzha is where the rhythm of the backwaters meets the silence of the soul. Known as the "hidden jewel" of Kozhikode.
                 </p>
                 <p class="premium-p secondary-text">
-                    From the deck of Symphony, the view is a living painting. You will witness the sky bleeding into shades of molten gold and deep violet as the sun dips below the water line. The calm, glass-like surface reflects the soaring water birds and the gentle sway of the palms, offering a panoramic sanctuary far removed from the rush of the world.
+                    From the deck of Symphony, the view is a living painting. You will witness the sky bleeding into shades of molten gold.
                 </p>
             </div>
         </section>
@@ -74,54 +80,52 @@
             <h2 class="logo-font-match gold-text">Safety & First Aid</h2>
             <div class="safety-grid">
                 <div class="safety-card"><span class="safety-icon">🦺</span><h4>Life Jackets</h4><p>Certified safety for all ages.</p></div>
-                <div class="safety-card"><span class="safety-icon">🩹</span><h4>Medical Kit</h4><p>Full kit including motion sickness relief and basic first aid.</p></div>
-                <div class="safety-card"><span class="safety-icon">🔥</span><h4>Fire Safety</h4><p>ABC extinguishers and smoke detectors in cabins.</p></div>
+                <div class="safety-card"><span class="safety-icon">🩹</span><h4>Medical Kit</h4><p>Full kit for basic first aid.</p></div>
+                <div class="safety-card"><span class="safety-icon">🔥</span><h4>Fire Safety</h4><p>ABC extinguishers on board.</p></div>
             </div>
         </section>
 
         <section id="gallery">
-            <h2 class="logo-font-match gold-text">Symphony Gallery</h2>
-            <div id="cloudinary-gallery" class="gallery-grid limit-view">
-                <p id="empty-msg" class="empty-state-text">No photos yet. Be the first to share your journey!</p>
+            <h2 class="logo-font-match gold-text">Symphony Moments</h2>
+            <p class="premium-p">Follow our journey on Instagram for the latest glimpses of paradise.</p>
+            
+            <div class="instagram-wrapper">
+                <div class="behold-widget-container" data-behold-id="YOUR_ID_HERE"></div>
+                <script src="https://w.behold.so/widget.js" type="module"></script>
             </div>
-            <button id="gallery-more-btn" class="read-more-btn" onclick="toggleView('cloudinary-gallery', 'gallery-more-btn')" style="display:none;">See More Photos</button>
+
+            <a href="https://www.instagram.com/YOUR_INSTA_HANDLE" target="_blank" class="gold-btn" style="margin-top: 30px;">
+                View Instagram Profile
+            </a>
         </section>
 
         <section id="reviews">
-            <h2 class="logo-font-match gold-text">Guest Experiences</h2>
-            <div id="reviews-display" class="review-container limit-view">
-                <p id="no-reviews-msg" class="empty-state-text">No reviews yet. Share your experience below!</p>
+            <h2 class="logo-font-match gold-text">Guest Reviews</h2>
+            
+            <div class="review-form-container">
+                <form id="reviewForm">
+                    <div class="star-rating">
+                        <input type="radio" name="stars" id="star5" value="5"><label for="star5">★</label>
+                        <input type="radio" name="stars" id="star4" value="4"><label for="star4">★</label>
+                        <input type="radio" name="stars" id="star3" value="3"><label for="star3">★</label>
+                        <input type="radio" name="stars" id="star2" value="2"><label for="star2">★</label>
+                        <input type="radio" name="stars" id="star1" value="1"><label for="star1">★</label>
+                    </div>
+                    <input type="text" id="reviewerName" placeholder="Your Name" required>
+                    <textarea id="reviewText" placeholder="Share your experience..." rows="3" required></textarea>
+                    <button type="submit" class="gold-btn">Submit Review</button>
+                </form>
             </div>
-            <button id="reviews-more-btn" class="read-more-btn" onclick="toggleView('reviews-display', 'reviews-more-btn')" style="display:none;">Read More Reviews</button>
 
-            <div class="add-review-box">
-                <h3>Leave a Review</h3>
-                <div class="star-rating">
-                    <input type="radio" name="stars" id="s5" value="5"><label for="s5">★</label>
-                    <input type="radio" name="stars" id="s4" value="4"><label for="s4">★</label>
-                    <input type="radio" name="stars" id="s3" value="3"><label for="s3">★</label>
-                    <input type="radio" name="stars" id="s2" value="2"><label for="s2">★</label>
-                    <input type="radio" name="stars" id="s1" value="1"><label for="s1">★</label>
-                </div>
-                <input type="text" id="reviewer-name" placeholder="Your Name" class="review-input-style">
-                <textarea id="review-text" placeholder="Tell us about your trip..."></textarea>
-                <button class="gold-btn" onclick="addReview()">Post Review</button>
-            </div>
-        </section>
-
-        <section id="upload">
-            <h3 class="logo-font-match gold-text">Share Your Moments</h3>
-            <div class="upload-box">
-                <label for="photo-input" class="upload-btn">📷 ADD PHOTOS</label>
-                <input type="file" id="photo-input" multiple hidden accept="image/*">
-                <p id="upload-status"></p>
-            </div>
+            <div id="reviewsFeed" class="reviews-display limit-view"></div>
+            <button id="readMoreBtn" class="read-more-btn" style="display: none;">Read More</button>
         </section>
 
         <div style="height: 100px;"></div>
     </main>
 
     <script>
+        // 1. Navigation Logic
         function toggleMenu() {
             document.getElementById('sideMenu').classList.toggle('active');
             document.querySelector('.menu-icon').classList.toggle('active-icon');
@@ -131,6 +135,7 @@
             document.querySelector('.menu-icon').classList.remove('active-icon');
         }
 
+        // 2. Scroll Parallax and Sticky Header
         window.onscroll = () => {
             let val = window.scrollY;
             const header = document.getElementById('stickyHeader');
@@ -147,11 +152,43 @@
             else header.classList.remove('reveal');
         };
 
-        function toggleView(id, btnId) {
-            const el = document.getElementById(id);
-            el.classList.toggle('expanded');
-            document.getElementById(btnId).innerText = el.classList.contains('expanded') ? "Show Less" : "See More";
+        // 3. Dynamic Reviews logic
+        const reviewForm = document.getElementById('reviewForm');
+        const reviewsFeed = document.getElementById('reviewsFeed');
+        const readMoreBtn = document.getElementById('readMoreBtn');
+
+        function updateReviewUI() {
+            if (reviewsFeed.children.length > 4) {
+                readMoreBtn.style.display = 'inline-block';
+            } else {
+                readMoreBtn.style.display = 'none';
+            }
         }
+
+        readMoreBtn.onclick = () => {
+            reviewsFeed.classList.toggle('limit-view');
+            readMoreBtn.innerText = reviewsFeed.classList.contains('limit-view') ? "Read More" : "Show Less";
+        };
+
+        reviewForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('reviewerName').value;
+            const text = document.getElementById('reviewText').value;
+            const stars = document.querySelector('input[name="stars"]:checked')?.value || 5;
+            const starString = "★".repeat(stars) + "☆".repeat(5 - stars);
+
+            const newReview = document.createElement('div');
+            newReview.className = 'review-card new-entry';
+            newReview.innerHTML = `
+                <div class="stars-static">${starString}</div>
+                <h4>${name}</h4>
+                <p>"${text}"</p>
+            `;
+
+            reviewsFeed.insertBefore(newReview, reviewsFeed.firstChild);
+            this.reset();
+            updateReviewUI();
+        });
     </script>
 </body>
 </html>
