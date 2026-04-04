@@ -26,14 +26,16 @@ body {
     width: 100%;
 }
 
-/* --- 3. THE STICKY HEADER (Book & Contact) --- */
+/* --- 3. THE STICKY HEADER (Shifted for Menu Clearance) --- */
 .sticky-top-nav {
     position: fixed;
     top: 0; width: 100%; height: 115px;
     background: rgba(0, 0, 0, 0.98);
     border-bottom: 2px solid var(--gold);
     z-index: 1000;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; /* Keeps items grouped in the center */
     opacity: 0; visibility: hidden;
     transform: translateY(-100%);
     transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
@@ -47,6 +49,8 @@ body {
     justify-content: center;
     gap: 35px;
     padding-top: 10px;
+    /* SHIFT: Creates space so the 'Contact' icon doesn't hit the hamburger menu */
+    margin-left: 80px; 
 }
 
 .hero-action-container {
@@ -146,136 +150,76 @@ section { padding: 100px 20px; text-align: center; max-width: 1000px; margin: 0 
 .logo-font-match { font-family: var(--logo-font); text-transform: uppercase; letter-spacing: 6px; font-size: 2.2rem; margin-bottom: 30px; }
 .premium-p { font-weight: 300; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
 
-/* --- 8. GRIDS --- */
+/* --- 8. GRIDS & INSTA --- */
 .safety-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
 .safety-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.1); padding: 40px; transition: 0.3s; }
 .safety-card:hover { border-color: var(--gold); }
 .safety-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
 
-.gallery-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-.gallery-img { width: 280px; height: 280px; object-fit: cover; border: 1px solid var(--gold); transition: 0.4s; }
-
-/* --- 9. REVIEWS & FEED LOGIC --- */
-.review-form-container {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 30px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    margin-bottom: 50px;
-    border-radius: 8px;
+.instagram-wrapper {
+    width: 100%; max-width: 1000px; margin: 0 auto; padding: 20px;
+    background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px; min-height: 400px;
 }
+.behold-widget-container iframe { border-radius: 4px; filter: grayscale(20%) contrast(110%); }
 
+/* --- 9. REVIEWS --- */
+.review-form-container {
+    background: rgba(255, 255, 255, 0.05); padding: 30px;
+    border: 1px solid rgba(212, 175, 55, 0.2); margin-bottom: 50px; border-radius: 8px;
+}
 #reviewForm { display: flex; flex-direction: column; gap: 15px; }
 #reviewForm input, #reviewForm textarea {
-    background: transparent;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    color: white;
-    padding: 12px;
-    font-family: var(--body-font);
+    background: transparent; border: 1px solid rgba(212, 175, 55, 0.4);
+    color: white; padding: 12px; font-family: var(--body-font);
 }
-
-.star-rating {
-    display: flex; flex-direction: row-reverse; justify-content: center;
-    font-size: 2rem; margin-bottom: 10px;
-}
+.star-rating { display: flex; flex-direction: row-reverse; justify-content: center; font-size: 2rem; margin-bottom: 10px; }
 .star-rating input { display: none; }
 .star-rating label { color: #333; cursor: pointer; transition: 0.2s; }
-.star-rating input:checked ~ label,
-.star-rating label:hover,
-.star-rating label:hover ~ label { color: var(--gold); }
+.star-rating input:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label { color: var(--gold); }
 
 .review-card {
-    background: #0a0a0a;
-    padding: 25px;
-    border-left: 3px solid var(--gold);
-    margin-bottom: 20px;
-    text-align: left;
-    transition: 0.3s;
+    background: #0a0a0a; padding: 25px; border-left: 3px solid var(--gold);
+    margin-bottom: 20px; text-align: left; transition: 0.3s;
 }
 .stars-static { color: var(--gold); letter-spacing: 2px; margin-bottom: 10px; }
+.reviews-display.limit-view > .review-card:nth-child(n+5) { display: none !important; }
 
-/* Hides reviews after the 4th one when limit-view is active */
-.reviews-display.limit-view > .review-card:nth-child(n+5) { 
-    display: none !important; 
-}
-.instagram-wrapper {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 8px;
-    min-height: 400px; /* Prevents layout jump while loading */
-}
-
-/* Ensure the widget matches your site's dark mode */
-.behold-widget-container iframe {
-    border-radius: 4px;
-    filter: grayscale(20%) contrast(110%);
-}
 /* --- 10. BUTTONS --- */
 .gold-btn, .read-more-btn {
-    display: inline-block; 
-    padding: 15px 35px; 
-    background: var(--gold); 
-    color: black;
-    border: none; 
-    font-weight: 600; 
-    text-transform: uppercase; 
-    cursor: pointer; 
-    letter-spacing: 2px;
-    transition: 0.3s;
+    display: inline-block; padding: 15px 35px; background: var(--gold); color: black;
+    border: none; font-weight: 600; text-transform: uppercase; cursor: pointer; 
+    letter-spacing: 2px; transition: 0.3s;
 }
+.read-more-btn { background: transparent; border: 2px solid var(--gold); color: var(--gold); margin-top: 10px; }
+.gold-btn:hover, .read-more-btn:hover { background: white; color: black; transform: translateY(-2px); }
 
-.read-more-btn { 
-    background: transparent; 
-    border: 2px solid var(--gold); 
-    color: var(--gold); 
-    margin-top: 10px;
-}
+.new-entry { border-left-color: var(--whatsapp-green); animation: slideIn 0.5s ease-out; }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
 
-.gold-btn:hover, .read-more-btn:hover { 
-    background: white; 
-    color: black;
-    transform: translateY(-2px); 
-}
-
-.new-entry { 
-    border-left-color: var(--whatsapp-green); 
-    animation: slideIn 0.5s ease-out;
-}
-
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-/* --- 11. AMBIENCE (MOVING GOLDEN DUST) --- */
+/* --- 11. AMBIENCE --- */
 .dust-container { position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.25; overflow: hidden; }
 .dust-layer { 
     width: 200%; height: 200%; position: absolute; top: -50%; left: -50%;
     background-image: radial-gradient(circle, var(--gold) 1px, transparent 1.2px), 
                       radial-gradient(circle, var(--white-gold) 1px, transparent 1.2px);
-    background-size: 80px 80px, 130px 130px; 
-    background-position: 0 0, 40px 40px;
-    animation: drift 40s linear infinite; 
+    background-size: 80px 80px, 130px 130px; animation: drift 40s linear infinite; 
 }
-
 @keyframes drift {
     0% { transform: translate(0, 0) rotate(0deg); }
     50% { transform: translate(5%, 5%) rotate(1deg); }
     100% { transform: translate(0, 0) rotate(0deg); }
 }
-
-@keyframes bounce { 
-    0%, 100% { transform: translateY(0) rotate(45deg); } 
-    50% { transform: translateY(-10px) rotate(45deg); } 
-}
+@keyframes bounce { 0%, 100% { transform: translateY(0) rotate(45deg); } 50% { transform: translateY(-10px) rotate(45deg); } }
 
 /* --- 12. RESPONSIVE --- */
 @media (max-width: 768px) {
     .sticky-top-nav { height: 105px; }
-    .header-compact-center { gap: 20px; }
+    .header-compact-center { 
+        gap: 20px; 
+        /* MOBILE SHIFT: Adjusted for smaller screens */
+        margin-left: 65px; 
+    }
     .hero-action-btn { width: 46px; height: 46px; font-size: 1.2rem; }
     .action-label { font-size: 0.65rem; letter-spacing: 1px; }
     .mini-branding img { width: 46px; height: 46px; }
